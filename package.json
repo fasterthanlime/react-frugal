@@ -1,16 +1,19 @@
 {
-  "name": "react-wastage-monitor",
-  "version": "0.2.3",
-  "description": "React Client Monitor that detects wasted rendering time on incorrectly developed Pure Components",
+  "name": "react-frugal",
+  "version": "1.0.0",
+  "description": "react-wastage-monitor, but shows pretty diffs when props changed but HTML did not.",
   "main": "npm/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MalucoMarinero/react-wastage-monitor"
+    "url": "https://github.com/fasterthanlim/react-frugal"
   },
   "author": "James Rakich",
+  "contributors": [
+    "Amos Wenger"
+  ],
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.24.1",
@@ -24,6 +27,7 @@
     "webpack-stream": "^3.2.0"
   },
   "dependencies": {
+    "deep-diff": "^0.3.8",
     "lodash": "^4.17.4",
     "react": "^15.5.4",
     "react-addons-shallow-compare": "^15.5.2",
