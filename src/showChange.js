@@ -72,6 +72,10 @@ function diffLogger(prevState, newState, logger, isCollapsed) {
   }
 }
 
+function isObject(x) {
+  return (!!x && typeof x === "object");
+}
+
 export default function (name, key, beforeObj, afterObj) {
   const before = beforeObj[key];
   const after = afterObj[key];
@@ -79,5 +83,10 @@ export default function (name, key, beforeObj, afterObj) {
     '%c' + name,
     'font-weight: bold;',
   );
-  diffLogger(before, after, console, false);
+
+  if (isObject(before) && isObject(after)) {
+    diffLogger(before, after, console, false);
+  } else {
+    console.log('before:', before, 'after:', after);
+  }
 }
