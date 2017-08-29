@@ -3,9 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 exports.style = style;
 exports.render = render;
 
@@ -14,7 +11,7 @@ exports.default = function (name, key, beforeObj, afterObj) {
   var after = afterObj[key];
   console.log('%c' + name, 'font-weight: bold;');
 
-  if (isObject(before) && isObject(after)) {
+  if ((0, _isPlainObject2.default)(before) && (0, _isPlainObject2.default)(after)) {
     diffLogger(before, after, console, false);
   } else {
     console.log('before:', before, 'after:', after);
@@ -24,6 +21,10 @@ exports.default = function (name, key, beforeObj, afterObj) {
 var _deepDiff = require('deep-diff');
 
 var _deepDiff2 = _interopRequireDefault(_deepDiff);
+
+var _isPlainObject = require('lodash/isPlainObject');
+
+var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -108,6 +109,6 @@ function diffLogger(prevState, newState, logger, isCollapsed) {
   }
 }
 
-function isObject(x) {
-  return !!x && (typeof x === 'undefined' ? 'undefined' : _typeof(x)) === "object";
+function isReallyPlainObject(x) {
+  return (0, _isPlainObject2.default)(x) && !x.$$typeof;
 }

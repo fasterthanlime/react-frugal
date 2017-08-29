@@ -1,4 +1,6 @@
 import differ from 'deep-diff';
+import isPlainObject from 'lodash/isPlainObject';
+import isCircular from 'is-circular';
 
 // https://github.com/flitbit/diff#differences
 const dictionary = {
@@ -72,8 +74,8 @@ function diffLogger(prevState, newState, logger, isCollapsed) {
   }
 }
 
-function isObject(x) {
-  return (!!x && typeof x === "object");
+function canBeDiffed(x) {
+  return isPlainObject(x) && !isCircular(x);
 }
 
 export default function (name, key, beforeObj, afterObj) {
@@ -84,7 +86,7 @@ export default function (name, key, beforeObj, afterObj) {
     'font-weight: bold;',
   );
 
-  if (isObject(before) && isObject(after)) {
+  if (canBeDiffed(before) && canBeDiffed(after)) {
     diffLogger(before, after, console, false);
   } else {
     console.log('before:', before, 'after:', after);
