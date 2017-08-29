@@ -1,6 +1,6 @@
 {
   "name": "react-frugal",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "react-wastage-monitor, but shows pretty diffs when props changed but HTML did not.",
   "main": "npm/index.js",
   "scripts": {

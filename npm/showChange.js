@@ -11,7 +11,7 @@ exports.default = function (name, key, beforeObj, afterObj) {
   var after = afterObj[key];
   console.log('%c' + name, 'font-weight: bold;');
 
-  if ((0, _isPlainObject2.default)(before) && (0, _isPlainObject2.default)(after)) {
+  if (canBeDiffed(before) && canBeDiffed(after)) {
     diffLogger(before, after, console, false);
   } else {
     console.log('before:', before, 'after:', after);
@@ -25,6 +25,10 @@ var _deepDiff2 = _interopRequireDefault(_deepDiff);
 var _isPlainObject = require('lodash/isPlainObject');
 
 var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
+
+var _isCircular = require('is-circular');
+
+var _isCircular2 = _interopRequireDefault(_isCircular);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -109,6 +113,6 @@ function diffLogger(prevState, newState, logger, isCollapsed) {
   }
 }
 
-function isReallyPlainObject(x) {
-  return (0, _isPlainObject2.default)(x) && !x.$$typeof;
+function canBeDiffed(x) {
+  return (0, _isPlainObject2.default)(x) && !(0, _isCircular2.default)(x);
 }
