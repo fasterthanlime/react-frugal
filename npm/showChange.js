@@ -3,6 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 exports.style = style;
 exports.render = render;
 
@@ -10,7 +13,12 @@ exports.default = function (name, key, beforeObj, afterObj) {
   var before = beforeObj[key];
   var after = afterObj[key];
   console.log('%c' + name, 'font-weight: bold;');
-  diffLogger(before, after, console, false);
+
+  if (isObject(before) && isObject(after)) {
+    diffLogger(before, after, console, false);
+  } else {
+    console.log('before:', before, 'after:', after);
+  }
 };
 
 var _deepDiff = require('deep-diff');
@@ -98,4 +106,8 @@ function diffLogger(prevState, newState, logger, isCollapsed) {
   } catch (e) {
     logger.log('—— diff end —— ');
   }
+}
+
+function isObject(x) {
+  return !!x && (typeof x === 'undefined' ? 'undefined' : _typeof(x)) === "object";
 }
